@@ -1,7 +1,7 @@
 import './App.css';
 import React, { Component } from 'react';
-import CardList from './components/card-list';
-import SearchBox from './components/search-box';
+import CardList from './components/card-list.component';
+import SearchBox from './components/search-box.component';
 // import axios from 'axios';
 
 // function getRandomValues(arr, count) {
