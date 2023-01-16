@@ -13,8 +13,6 @@ import React, { Component } from 'react';
 //   return shuffled.slice(min);
 // }
 
-
-
 class App extends Component {
   constructor() {
     super();
@@ -46,20 +44,29 @@ class App extends Component {
     //     })
   }
 
+  onSearchChange = (event) => {
+    const searchValue = event.target.value.toLocaleLowerCase();
+    this.setState(() => {
+      return { searchField: searchValue }
+    })
+  }
+
 
   render() {
     console.log('render')
+    const { monsters, searchField } = this.state;
+    const { onSearchChange } = this;
     const filtredMonters = this.state.monsters.filter((monster) => {
-      return monster.name.toLocaleLowerCase().includes(this.state.searchField)
+      return monster.name.toLocaleLowerCase().includes(searchField)
     })
     return (
       <div className='App' >
-        <input className='searchBox' type='search' placeholder='search monster' onChange={(event) => {
-          const searchField = event.target.value.toLocaleLowerCase();
-          this.setState(() => {
-            return { searchField }
-          })
-        }} />
+        <input
+          className='searchBox'
+          type='search'
+          placeholder='search monster'
+          onChange={onSearchChange}
+        />
         {filtredMonters.map((monster) => {
           return (
             <div key={monster.id}>
