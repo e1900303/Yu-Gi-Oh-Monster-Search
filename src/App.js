@@ -56,7 +56,9 @@ class App extends Component {
       return monster.name.toLocaleLowerCase().includes(searchField)
     })
     return (
+
       <div className='App' >
+        <img src='https://toppng.com/download/yet8GsuEDa1mqyhdVXdU1pX8MeQa2eFADHNVHBjWOI80CHo1yzWCmCOBz8SBbPzlfMzhWj4dIqCmtl9CPdqwhQKF7YEYmFg4xo1OcJTDRYdbfXJEwhLfP6Gzkrw3eFEWIlt4CYTCtN9QSUGT4G7x7Ly9osgq6XPrIaXLWTPA6Hqilo6ktuX8LejZjDGMa1h2f1vqvOeg/large' alt='logo' className='logo' />
         <SearchBox onChangeHandler={onSearchChange} placeholder='search monsters' className='search-box' />
         <CardList monsters={filtredMonters} />
       </div>
