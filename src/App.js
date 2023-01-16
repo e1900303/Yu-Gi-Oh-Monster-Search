@@ -1,5 +1,7 @@
 import './App.css';
 import React, { Component } from 'react';
+import CardList from './components/card-list';
+import SearchBox from './components/search-box';
 // import axios from 'axios';
 
 // function getRandomValues(arr, count) {
@@ -20,11 +22,9 @@ class App extends Component {
       monsters: [],
       searchField: '',
     };
-    console.log('constructor')
   }
 
   componentDidMount() {
-    console.log('componentDidMount')
     fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php?type=normal%20monster')
       .then((response) => response.json())
       .then((users) => this.setState(
@@ -33,9 +33,6 @@ class App extends Component {
           return { monsters: users.data }
           // return { monsters: getRandomValues(users.data, 10) }
         },
-        () => {
-          console.log(this.state)
-        }
       ))
     //   axios.get('https://jsonplaceholder.typicode.com/users')
     //     .then((users) => this.setState({ monsters: users.data }))
@@ -45,7 +42,7 @@ class App extends Component {
   }
 
   onSearchChange = (event) => {
-    const searchValue = event.target.value.toLocaleLowerCase();
+    const searchValue = event.target.value.toLocaleLowerCase()
     this.setState(() => {
       return { searchField: searchValue }
     })
@@ -53,27 +50,15 @@ class App extends Component {
 
 
   render() {
-    console.log('render')
-    const { monsters, searchField } = this.state;
+    const { monsters, searchField } = this.state
     const { onSearchChange } = this;
     const filtredMonters = this.state.monsters.filter((monster) => {
       return monster.name.toLocaleLowerCase().includes(searchField)
     })
     return (
       <div className='App' >
-        <input
-          className='searchBox'
-          type='search'
-          placeholder='search monster'
-          onChange={onSearchChange}
-        />
-        {filtredMonters.map((monster) => {
-          return (
-            <div key={monster.id}>
-              <h1>{monster.name}</h1>
-            </div>
-          )
-        })}
+        <SearchBox onChangeHandler={onSearchChange} placeholder='search monsters' className='search-box' />
+        <CardList monsters={filtredMonters} />
       </div>
     );
   };
